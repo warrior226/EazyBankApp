@@ -1,7 +1,9 @@
 package com.eazybytes.accounts.repository;
 
 import com.eazybytes.accounts.entity.Accounts;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -29,4 +31,25 @@ import java.util.Optional;
 public interface AccountsRepository extends JpaRepository<Accounts, Long> {
 
     Optional<Accounts> findByCustomerId(Long customerId);
+    /**
+     * The @Transactional annotation is used to specify that a method should be
+     * executed in a transaction. If the method executes successfully, the
+     * transaction is committed. If the method throws an exception, the
+     * transaction is rolled back.
+     * <p>
+     * The @Modifying annotation is used to specify that a method should modify
+     * the database. If the method is annotated with @Modifying, then the
+     * database should be modified. If the method is not annotated with
+     * @Modifying, then the database should not be modified.
+     * <p>
+     * In this case, the deleteAccount method is annotated with @Transactional,
+     * which means that the method should be executed in a transaction. The
+     * @Modifying annotation is used to specify that the method should modify the
+     * database. If the method is successful, the transaction is committed. If
+     * the method throws an exception, the transaction is rolled back.
+     */
+    @Transactional
+    @Modifying
+    void deleteByCustomerId(Long customerId);
+
 }
