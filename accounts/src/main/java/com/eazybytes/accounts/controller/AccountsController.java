@@ -4,6 +4,10 @@ import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ResponseDto;
 import com.eazybytes.accounts.service.IAccountsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -30,6 +34,10 @@ import org.springframework.web.bind.annotation.*;
  * It is used to inject the dependencies of the class through the constructor.
  * In this case, it is used to inject the IAccountsService dependency to the AccountsController class.
  */
+@Tag(
+        name = "CRDU REST APIs for Accounts in EazyBank",
+        description="CRUD REST APIs in EazyBank to CREATE, READ, UPDATE, and DELETE accounts"
+)
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
@@ -66,6 +74,15 @@ public class    AccountsController {
      * </ul>
      * The API is located at path "/api/create".
      */
+    @ApiResponse(
+            responseCode = "201",
+            description = "HTTP Status CREATED"
+    )
+    @Operation(
+            summary = "Create Account REST API",
+
+            description = "REST API to create new Customer & Account inside EazyBank"
+    )
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {
         iAccountsService.createAccount(customerDto);
@@ -83,6 +100,24 @@ public class    AccountsController {
        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
 
+
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "HTTP Status OK"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "HTTP Status Internal Server Error"
+                    )
+            }
+    )
+    @Operation(
+            summary = "Update Account Details REST API",
+
+            description = "REST API to update Customer & Account details based on an account number inside EazyBank"
+    )
      @PutMapping("/update")
     public
      ResponseEntity<ResponseDto> updateAccountDetails(@Valid @RequestBody CustomerDto customerDto){
