@@ -32,10 +32,10 @@ public class GlobalExceptionHandler{
         return new ResponseEntity<>(errorResponseDto,HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CustomerAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponseDto> handleAlreadyExistsException(CustomerAlreadyExistsException ex, WebRequest request){
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception ex, WebRequest request){
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(
-                HttpStatus.BAD_REQUEST.toString(),
+                HttpStatus.INTERNAL_SERVER_ERROR.toString(),
                 ex.getMessage(),
                 request.getDescription(false),
                 LocalDateTime.now()
