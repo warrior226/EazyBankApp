@@ -2,9 +2,12 @@ package com.eazybytes.accounts.controller;
 
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDto;
+import com.eazybytes.accounts.dto.ErrorResponseDto;
 import com.eazybytes.accounts.dto.ResponseDto;
 import com.eazybytes.accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -91,6 +94,15 @@ public class    AccountsController {
                 .body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
     }
 
+    @Operation(
+            summary = "Fetch Account Details REST API",
+
+            description = "REST API to fetch Customer & Account details based on an account number inside EazyBank"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK"
+    )
     @GetMapping("/fetch")
     public  ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
                                                                 @Pattern(regexp ="(^$|[0-9]{10})$", message = "Mobile number should be 10 digits")
@@ -109,7 +121,14 @@ public class    AccountsController {
                     ),
                     @ApiResponse(
                             responseCode = "500",
-                            description = "HTTP Status Internal Server Error"
+                            description = "HTTP Status Internal Server Error",
+                            content = @Content(
+                                    schema =@Schema(implementation = ErrorResponseDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "417",
+                            description = "Expectation Failed"
                     )
             }
     )
@@ -130,11 +149,33 @@ public class    AccountsController {
         }
         else {
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(AccountsConstants.STATUS_417, AccountsConstants.MESSAGE_417_UPDATE));
         }
      }
 
+
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "HTTP Status OK"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "HTTP Status Internal Server Error"
+                    ),
+                    @ApiResponse(
+                            responseCode = "417",
+                            description = "Expectation Failed"
+                    )
+            }
+    )
+    @Operation(
+            summary = "Delete Account and Customer Details REST API",
+
+            description = "REST API to delete Customer & Account details based on an account number inside EazyBank"
+    )
      @DeleteMapping("/delete")
      public ResponseEntity<ResponseDto> deleteAccount(
              @RequestParam

@@ -1,5 +1,6 @@
 package com.eazybytes.accounts.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,18 +23,37 @@ import lombok.Data;
  *
  */
 @Data
+@Schema(
+        name = "Customer",
+        description = "Schema to hold customer and account information"
+)
 public class CustomerDto {
 
+    @Schema(
+            description = "Name of the customer",
+            example = "RAYAISSE Patrick"
+    )
     @NotEmpty(message = "Name can not be an null or empty")
     @Size(min = 5,max = 30, message = "Name should be between 5 and 30 characters")
     private String name;
 
+    @Schema(
+            description = "Email of the customer",
+            example = "rayaissewendyam@gmail.com"
+    )
     @NotEmpty(message = "Email can not be an null or empty")
     @Email(message = "Email should be valid")
     private String email;
 
+    @Schema(
+            description = "Model Number of the customer",
+            example = "+226 65272174"
+    )
     @Pattern(regexp ="(^$|[0-9]{10})$", message = "Mobile number should be 10 digits")
     private  String mobileNumber;
 
+    @Schema(
+            description = "Account information"
+    )
     private AccountsDto accountsDto;
 }

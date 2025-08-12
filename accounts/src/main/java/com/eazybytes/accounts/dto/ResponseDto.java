@@ -1,5 +1,6 @@
 package com.eazybytes.accounts.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,9 +17,21 @@ import lombok.Data;
  * message or a success message.
  */
 @Data @AllArgsConstructor
+@Schema(
+        name = "Response",
+        description = "Schema to hold successful response information"
+)
 public class ResponseDto
 {
+    @Schema(
+            description = "Status code of the response",
+            example = "200 SUCCESS"
+    )
     private String statusCode;
 
+    @Schema(
+            description = "Status message of the response",
+            example = "Account created successfully"
+    )
     private String statusMessage;
 }
