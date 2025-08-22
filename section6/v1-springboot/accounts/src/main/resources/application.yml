@@ -18,3 +18,11 @@ spring:
 build:
   version: "1.0"
 
+accounts:
+  message: "Welcome to Accounts Service"
+  contactDetails:
+    name: "RAYAISSE Patrick"
+    email: "rayaissewendyam@gmail.com"
+  onCallSupport:
+    -65272174
+    -70258901

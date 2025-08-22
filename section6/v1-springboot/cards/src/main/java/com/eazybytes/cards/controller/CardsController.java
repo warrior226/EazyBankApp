@@ -42,6 +42,9 @@ public class CardsController {
     private String buildVersion;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired
     public CardsController(ICardsService iCardsService) {
         this.iCardsService = iCardsService;
     }
@@ -197,4 +200,28 @@ public class CardsController {
         return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
     }
 
+
+
+    @Operation(
+            summary = "Get Maven Version REST API",
+            description = "REST API to get the maven version of the application"
+    )
+    @ApiResponses({
+
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/maven-version")
+    public ResponseEntity<String> getMavenVersion(){
+        return  ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("MAVEN_HOME"));
+    }
 }
