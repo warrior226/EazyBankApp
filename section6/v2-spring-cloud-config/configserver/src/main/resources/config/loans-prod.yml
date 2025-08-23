@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+loans:
+  message: "Welcome to EazyBank cards related Prod APIs"
+  contactDetails:
+    name: "RAYAISSE Wendyam-Product Owner"
+    email: "rayaissewendyam@gmail.com"
+  onCallSupport:
+    -65272174
+    -70258901
