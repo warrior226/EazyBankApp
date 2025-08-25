@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableConfigurationProperties(LoansInfoDto.class)
+@EnableConfigurationProperties(value={LoansInfoDto.class})
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @OpenAPIDefinition(
         info = @Info(

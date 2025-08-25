@@ -2,13 +2,14 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+     active: native
+    #active: git
   cloud:
     config:
       server:
-        native:
+         native:
           search-locations: "classpath:/config"
-
+        # search-locations: "file:///Users//eazybytes//Documents//config"
 
 server:
   port: 8071
