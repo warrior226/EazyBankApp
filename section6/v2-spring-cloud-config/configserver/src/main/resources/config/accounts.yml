@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to Accounts Service related to local APIs"
+  contactDetails:
+    name: "RAYAISSE Patrick"
+    email: "rayaissewendyam@gmail.com"
+  onCallSupport:
+    -65272174
+    -70258901

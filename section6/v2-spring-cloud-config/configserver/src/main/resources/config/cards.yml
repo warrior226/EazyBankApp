@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to EazyBank cards related local APIs"
+  contactDetails:
+    name: "RAYAISSE Wendyam"
+    email: "rayaissewendyam@gmail.com"
+  onCallSupport:
+    -65272174
+    -70258901
