@@ -22,3 +22,9 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071/"
 
+#for actuator (enable cards microservice to load changed properties from the config server without restart)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

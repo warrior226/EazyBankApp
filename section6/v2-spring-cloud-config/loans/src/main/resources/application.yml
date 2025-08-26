@@ -22,3 +22,10 @@ spring:
        "optional:configserver:http://localhost:8071/"
   profiles:
    active: "prod"
+
+#for actuator (enable loans microservice to load changed properties from the config server without restart)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
