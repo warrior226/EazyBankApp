@@ -46,7 +46,6 @@ public class CardsController {
 
     private final CardsInfoDto cardsInfoDto;
 
-    @Autowired
     public CardsController(ICardsService iCardsService, Environment environment, CardsInfoDto cardsInfoDto) {
         this.iCardsService = iCardsService;
         this.environment = environment;
@@ -247,7 +246,7 @@ public class CardsController {
                     )
             )
     })
-    @GetMapping("/cards-info")
+    @GetMapping("/contact-info")
     public ResponseEntity<CardsInfoDto> getCardsInfo(){
         return  ResponseEntity.status(HttpStatus.OK).body(cardsInfoDto);
     }
